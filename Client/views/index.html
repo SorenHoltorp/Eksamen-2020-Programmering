@@ -1,66 +1,99 @@
-    <!DOCTYPE html>  
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Eksamensopgave 2020</title>
-        </head>
-        <body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML form</title>
+    
 
+    <style>
+body {
+  background-color: pink;
+  align-content: center;  
+}
+
+.container {
+    background-color: white;
+border-radius: 5px;
+  box-shadow: 0 2px 15px rgba(0,0,0.8);
+  overflow: hidden;
+  width: 420px;
+  max-width: 100%;
+}
+
+
+.header {
+      background-color: #F8F8FF;
+  border-bottom: 1px solid #F8F8FF;
+padding: 20px 40px ;
+}
+
+.header h2 {
+  margin: 0px;
+
+}
+
+.form {
+    padding: 30px 50px;
+
+}
+
+    </style>
+
+    </head>
+    <body>
+
+        <div class= "container">
+            <div class="header">
+              <h2>Opret en konto</h2>
+            </div>
+      
+    
+    <div>
+        
             
-    <p id="validationTextRating" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
-        
-	<p id="validationTextName" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
-        
-	<p id="validationTextPhonenum" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
-        
-	<p id="validationTextEmail" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
-        
-	<p id="validationTextContactdate" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
--->        
-        <form name="userContact" onsubmit="return validateContactInformation()" method="get">
+        <form class="form" name="userContact" onsubmit="return validateContactInformation()" method="get">
             
             <!-- Radio buttons -->
-            Your rating: 
+            Dit køn: 
             <br/>
-            <input type="radio" class="user_rating" name="rating" value="Awesome"/>Awesome
+            <input type="radio" class="user_rating" name="rating" value="Mand"/>Mand
             <br/>
-            <input type="radio" class="user_rating" name="rating" value="Mediocre"/>Mediocre
+            <input type="radio" class="user_rating" name="rating" value="Kvinde"/>Kvinde
             <br/>
-            <input type="radio" class="user_rating" name="rating" value="Lame"/>Lame
+            <input type="radio" class="user_rating" name="rating" value="Trejde"/>Noget trejde
             
             <br/>
             <br/>
             
             <!-- Text fields -->
-            Name 
+            Fulde Navn 
             <br/>
-            <input type="text" id="user_name" value="" placeholder="Your name"/>
-            <br/>
-            <br/>
-            
-            Organization 
-            <br/>
-            <input type="text" id="organization" value="" placeholder="Organization"/>
+            <input type="text" id="user_name" value="" placeholder="Supermand"/>
             <br/>
             <br/>
             
-            Phone 
+            Job titel 
             <br/>
-            <input type="text" id="phone" value="" placeholder="Phone number"/>
+            <input type="text" id="organization" value="" placeholder="Superhelt"/>
+            <br/>
+            <br/>
+            
+            Mobil nummer 
+            <br/>
+            <input type="text" id="phone" value="" placeholder="123456"/>
             <br/>
             <br/>
             
             Email 
             <br/>
-            <input type="text" id="email" value="" placeholder="Email address"/>
+            <input type="text" id="email" value="" placeholder="Email addresse"/>
             <br/>
             <br/>
             
             <!-- Dropdown lists -->
-            Preferred contact date
+            Fødselsdag
             <br/>
             <select type="text" id="contact_day">
-                <option selected disabled>-Day-</option>
+                <option selected disabled>-Dag-</option>
                 <option value="1">01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
@@ -75,10 +108,9 @@
                 <option value="12">12</option>
                 <!-- ...and so forth -->
             </select>
-
             
             <select type="text" id="contact_month">
-                <option selected disabled>-Month-</option>
+                <option selected disabled>-Måned-</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>
@@ -90,7 +122,7 @@
             </select>
             
             <select type="text" id="contact_year">
-                <option selected disabled>-Year-</option>
+                <option selected disabled>-År-</option>
                 <option value="2018">2018</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
@@ -101,9 +133,9 @@
             <br/>
             
             <!-- Text area for additional comments -->
-            Additional comments
+            Lidt tekst om dig
             <br/>
-            <textarea type="text" rows="5" cols="30" id="additional_info" value="" placeholder="Your feedback"></textarea>
+            <textarea type="text" rows="5" cols="30" id="additional_info" value="" placeholder="Din beskrivelse"></textarea>
             <br/>
             
             <!-- Submit button to activate some function -->
@@ -112,8 +144,7 @@
     </div>
     
         
-        </body>
-
-
-        <script src ="script.js"> </script>
-        </html>
+        <!-- Linking external Javascript file to our HTML page -->
+        <script type="application/x-javascript" src="script.js"></script>
+    </body>
+</html>
