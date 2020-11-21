@@ -1,0 +1,119 @@
+    <!DOCTYPE html>  
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Eksamensopgave 2020</title>
+        </head>
+        <body>
+
+            
+    <p id="validationTextRating" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
+        
+	<p id="validationTextName" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
+        
+	<p id="validationTextPhonenum" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
+        
+	<p id="validationTextEmail" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
+        
+	<p id="validationTextContactdate" style="color: red; margin-top: 1px; margin-bottom: 1px;"></p>
+-->        
+        <form name="userContact" onsubmit="return validateContactInformation()" method="get">
+            
+            <!-- Radio buttons -->
+            Your rating: 
+            <br/>
+            <input type="radio" class="user_rating" name="rating" value="Awesome"/>Awesome
+            <br/>
+            <input type="radio" class="user_rating" name="rating" value="Mediocre"/>Mediocre
+            <br/>
+            <input type="radio" class="user_rating" name="rating" value="Lame"/>Lame
+            
+            <br/>
+            <br/>
+            
+            <!-- Text fields -->
+            Name 
+            <br/>
+            <input type="text" id="user_name" value="" placeholder="Your name"/>
+            <br/>
+            <br/>
+            
+            Organization 
+            <br/>
+            <input type="text" id="organization" value="" placeholder="Organization"/>
+            <br/>
+            <br/>
+            
+            Phone 
+            <br/>
+            <input type="text" id="phone" value="" placeholder="Phone number"/>
+            <br/>
+            <br/>
+            
+            Email 
+            <br/>
+            <input type="text" id="email" value="" placeholder="Email address"/>
+            <br/>
+            <br/>
+            
+            <!-- Dropdown lists -->
+            Preferred contact date
+            <br/>
+            <select type="text" id="contact_day">
+                <option selected disabled>-Day-</option>
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <!-- ...and so forth -->
+            </select>
+
+            
+            <select type="text" id="contact_month">
+                <option selected disabled>-Month-</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                 <option value="4">April</option>
+                <option value="5">May</option>
+                 <option value="6">June</option>
+                <option value="7">July</option>
+                <!-- ...and so forth -->
+            </select>
+            
+            <select type="text" id="contact_year">
+                <option selected disabled>-Year-</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <!-- ...and so forth -->
+            </select>
+            <br/>
+            <br/>
+            
+            <!-- Text area for additional comments -->
+            Additional comments
+            <br/>
+            <textarea type="text" rows="5" cols="30" id="additional_info" value="" placeholder="Your feedback"></textarea>
+            <br/>
+            
+            <!-- Submit button to activate some function -->
+            <button type="submit" style="cursor: pointer;">Submit</button>
+        </form>
+    </div>
+    
+        
+        </body>
+
+
+        <script src ="script.js"> </script>
+        </html>
