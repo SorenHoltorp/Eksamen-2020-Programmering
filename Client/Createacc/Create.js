@@ -4,7 +4,7 @@ function validateContactInformation() {
     // Punkt 1: Sæt JS variable, til de værdier der er indtastet i HTML formen
     
     var name = document.getElementById('user_name').value;
-    var org = document.getElementById('organization').value;
+    var password = document.getElementById('password').value;
     var phone = document.getElementById('phone').value;
     var email = document.getElementById('email').value;
 
@@ -52,7 +52,7 @@ function validateContactInformation() {
     
     // Vi slutter funktionen af med at lave en alert besked for at se om alle de varible er blevet hentet ordenligt fra html dokumentet
    alert("Hej " + name         + "\nKøn: " + userRating
-         + "\nOrganization: " + org
+         + "\npassword: " + password
          + "\nPhone: " + phone
          + "\nEmail: " + email
          + "\nYour comment: " + comment
@@ -60,5 +60,14 @@ function validateContactInformation() {
          + "\nToday's date: " + currentDate);
        
 }
-    
-    
+
+//Code til at sende mig videre til main page    
+
+ /*type="text/javascript">
+document.getElementById("opret").onclick = function(){
+ location.href = "..//Mainpage/mainpage.html";
+}*/
+
+/* document.getElementById("main").onclick = function(){
+      location.href = "../Mainpage/mainpage.html";
+     } */
