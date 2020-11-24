@@ -1,13 +1,16 @@
 //importere express
 const express = require("express");
 const cors = require("cors");
+// importere body-parser
+const bodyParser = require("body-parser")
 // we execute it
 const app = express();
-
-
 const mongoose = require("mongoose");
-
 require("dotenv/config");
+
+// Så jeg kan snakke med Json filen ved alle request
+app.use(cors())
+app.use(bodyParser.json());
 
 //Import routes
 const postsRoute = require("./Routes/posts");
