@@ -22,7 +22,7 @@ app.use("/posts",postsRoute);
 
 //Routes
 app.get('/',(req,res)=>{
-    res.send("we are home");
+    res.send("Du har nået siden");
 });
 
 //Middlewares
@@ -46,10 +46,10 @@ mongoose.connect(
     process.env.DB_CONNECTION,
     { useNewUrlParser: true },
     // { useUnifiedTopology: true }, // Virker ikke med vores server
-    () => console.log("connected to DB!"))
+    () => console.log("Serveren kører babe!"))
 
 
 // how to listen to server
-app.listen(3000);
+app.listen(8080);
 
 // Nu kører serveren ved npm start i consollen. 
