@@ -24,4 +24,4 @@ mongoose.Schema({
 })
 //Exportere schema til MongoDB
 
-module.exports = mongoose.model("Posts", PostSchema);
+module.exports = mongoose.model("user", PostSchema);

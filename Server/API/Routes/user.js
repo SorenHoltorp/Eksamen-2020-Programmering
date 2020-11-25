@@ -2,7 +2,7 @@ const express = require("express");
 
 //Vi laver en route, som fungerer som en function
 const router = express.Router();
-const Post = require("../Models/Post");
+const Post = require("../../Models/User");
 
 // Vi creater vores egne routes i seperate filer og importere her
 
@@ -24,10 +24,13 @@ router.get("/", async (req,res) => {
 
 // Det her sender et post afsted som jeg skriver i json body filen
 router.post("/", async (req,res) => {
-    const post = new Post({
-        title: req.body.title,
-        description: req.body.description
+    const user = new User({
+        Username: req.body.username,
+        Password: req.body.password
     });
+    res.status(201).jason({
+        message: "New user was created"
+    })
     try {
     const savedPost = await post.save();
     res.json(savedPost);
@@ -38,9 +41,9 @@ router.post("/", async (req,res) => {
 
 
 //Søgning efter specifik route på objektID ( Se om der findes en user i databasen)
-router.get("/:postId", async (req,res)=> {
+router.get("/:userId", async (req,res)=> {
     try{
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.userId);
     res.json(post)
     }catch(err)
         {res.json({messege:err})
@@ -49,9 +52,9 @@ router.get("/:postId", async (req,res)=> {
 
 //Delete en post ( Kunne være en specifik bruger)
 // Async er fordi vi laver en promise
-router.delete("/:postId", async (req,res)=>{
+router.delete("/:userId", async (req,res)=>{
    try {
-    const removedPost = await Post.remove({_id: req.params.postId})
+    const removedPost = await Post.remove({_id: req.params.userId})
     res.json(removedPost);
    }catch(err)
    {res.json({messege:err})
@@ -60,9 +63,9 @@ router.delete("/:postId", async (req,res)=>{
 
 
 //Update en user (post)
-router.patch("/:postId", async(req,res)=>{
+router.patch("/:userId", async(req,res)=>{
     try{
-        const updatedPost = await Post.updateOne ({_id: req.params.postId}, 
+        const updatedPost = await Post.updateOne ({_id: req.params.userId}, 
             {$set: { title: req.body.title } })
             res.json(updatedPost);
     }catch(err){

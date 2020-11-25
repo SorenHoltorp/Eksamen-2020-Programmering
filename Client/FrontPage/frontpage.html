@@ -31,29 +31,14 @@
      </div>
    </form>
  </div>
+ <br>
+ 
+ <div id="Callback">
+  <input type="button" value="Contact API" id="apiButton">
+</div>
 
 </body>
 
-       <script type="text/javascript">
-document.getElementById("create").onclick = function(){
-        location.href = "../Createacc/Createacc.html";
-    }
-
-    // Ændre 0 til local storage username
-    document.getElementById("login").onclick = function(){
-        if (username.value.length !== 0 && password.value.length !== 0 ){
-            location.href = "../Mainpage/mainpage.html";
-        }else{
-                alert ("fill out login");
-            }
-        }
-    
-    
-
-
-       
-
-
-       </script>
+       <script type="text/javascript" src="Frontpage.js"></script>
 
 </html>
