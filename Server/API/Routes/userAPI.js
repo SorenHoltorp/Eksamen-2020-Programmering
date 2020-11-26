@@ -15,8 +15,16 @@ message:  "Handling GET request til /user"
 
 //Vi bruger nu router til håndtere POST request (url)
 router.post("/",(req, res, next) => {
+    const user = {
+        username: req.body.username,
+        password: req.body.password,
+        køn: req.body.køn,
+        email: req.body.køn,
+        alder: req.body.alder
+    }
     res.status(201).json({
-message:  "Handling POST request til /user"
+    message:  "Handling POST request til /user",
+        createdUser: user
     });
 });
 

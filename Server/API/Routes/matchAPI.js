@@ -10,8 +10,16 @@ router.get("/", (req, res, next)=>{
 })
 
 router.post("/", (req, res, next)=>{
+    const match = {
+        matchId: req.body.matchId,
+        matchName: req.body.matchName,
+        matchPhoto: req.body.matchPhoto,
+        matchKøn: req.body.matchKøn,
+        matchAlder: req.body.matchAlder
+    }
     res.status(201).json({
-        message: "Potentiel match blev oprettet"
+        message: "Potentiel match blev oprettet",
+        match: match
     })
 })
 

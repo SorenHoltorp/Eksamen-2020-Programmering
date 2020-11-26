@@ -4,7 +4,7 @@ const express = require("express");
 //importere cors, en nødvendighed for at bruge http
 //const cors = require("cors");
 // importere body-parser - omskriver json
-//const bodyParser = require("body-parser")
+const bodyParser = require("body-parser")
 // bruger express til vores server
 const app = express();
 //importere mongoose, et udvidelse til MongoDb
@@ -25,10 +25,21 @@ const matchRoute = require("./API/Routes/matchAPI")
 
 // Så jeg kan snakke med Json filen ved alle request
 //app.use(cors())
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({extended: false}));
+//Gør json data læseligt for mig
+app.use(bodyParser.json());
+// Kunne oversætte url data til javascript. boolean værdien siger noget om hvor kompleks værdierne skal være. False er simple værdier.
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan("dev"));
 
+app.use(req,res,next => {
+    res.header("Access-Control-Allow-Origin","*");
+    res.header(
+        "Access-Control-Allow-Headers","*");
+if (req.method === "OPTIONS"){
+    res.header ("Access-Control-Allow-Methods","PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});  
+    }
+});
 //Routes som skal håndtere requests
 app.use("/user", userRoute);
 app.use("/match", matchRoute);
