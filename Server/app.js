@@ -8,7 +8,7 @@ const bodyParser = require("body-parser")
 // bruger express til vores server
 const app = express();
 //importere mongoose, et udvidelse til MongoDb
-//const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 //nodejs måde at logge ting på - middleware
 const morgan = require("morgan");
 
@@ -17,11 +17,19 @@ const morgan = require("morgan");
 const userRoute = require("./API/Routes/userAPI")
 const matchRoute = require("./API/Routes/matchAPI")
 
+// ved at tilføje process.env.MONGO_ATLAS_PW,
+// så behøver jeg ikke hardcore mit password ind i stien, istedet laver jeg et opbject inde i nodemon.json filen
+// ellers så er dette stien til min databse på mongoDB atlas
+mongoose.connect(
+ "mongodb+srv://soren:"
+    + process.env.MONGO_ATLAS_PW + 
+"@tinderapp.f1lwk.mongodb.net/<dbname>?retryWrites=true&w=majority",
+{ useNewUrlParser: true },
+{ useUnifiedTopology: true }, // Virker ikke med vores server
+() => console.log("Serveren kører babe!"));
 
+mongoose.Promise = global.Promise;
 
-
-//Henter mongoDb stien til databasen
-//require("dotenv/config");
 
 // Så jeg kan snakke med Json filen ved alle request
 //app.use(cors())
@@ -31,7 +39,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan("dev"));
 
-app.use(req,res,next => {
+// Alt den her kode gør, at jeg kan sende req til single-view applikations igennem cors
+app.use((req, res,next) => {
     res.header("Access-Control-Allow-Origin","*");
     res.header(
         "Access-Control-Allow-Headers","*");
@@ -39,7 +48,9 @@ if (req.method === "OPTIONS"){
     res.header ("Access-Control-Allow-Methods","PUT, POST, PATCH, DELETE, GET");
     return res.status(200).json({});  
     }
+    next();
 });
+
 //Routes som skal håndtere requests
 app.use("/user", userRoute);
 app.use("/match", matchRoute);
