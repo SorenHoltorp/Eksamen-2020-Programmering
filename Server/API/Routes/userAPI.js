@@ -4,13 +4,43 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const User = require("../Models/userModel");
 const { request } = require("http");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination:function(req,file,cb) {
+        cb(null, "./uploads/")
+    },
+    filename: function(req, file, cb){
+        cb(null, new Date().toISOString() + file.originalname);
+    }
+
+})
+const fileFilter = (req, file, cb)=> {
+        // tillader en fil
+    if(file.mimetype === "image/jpeg " || file.mimetype === "image/png"){
+        cb(null,true);
+// Afviser en fil hvis den ikke er jpeg, eller png
+    }else { 
+        cb(new Error ("Kun JPEG eller PNG"), false);
+    }
+   
+}
+
+// Størrelsen på de uploads af billeder
+const upload = multer({storage: storage,
+    limits:{
+    fileSize: 1024 * 1024 * 5
+},
+    fileFilter: fileFilter
+
+});
 
 // HTTP REQUEST NEDENFOR
 
 //Vi bruger nu router til håndtere GET request (url)
 router.get("/",(req, res, next) => {
     User.find()
-    .select("username password _id køn email alder")
+    .select("username password _id køn email alder userBillede")
     .exec()
     .then(docs =>{
         const svarpårequest = {
@@ -22,6 +52,7 @@ router.get("/",(req, res, next) => {
         køn: doc.køn,
         email: doc.email,
         alder: doc.alder,
+        userBillede: doc.userBillede,
         _id: doc._id,
         request:{
             type:"GET",
@@ -49,7 +80,8 @@ router.get("/",(req, res, next) => {
 });
 
 //Vi bruger nu router til håndtere POST request (url)
-router.post("/",(req, res, next) => {
+router.post("/", upload.single("userImage"),(req, res, next) => {
+    console.log(req.file);
     const user = new User({
         //Her opretter vi et ID, igennem mongoose, som er unikt og som bruges som refference punkt igennem alle andre request.
         _id: new mongoose.Types.ObjectId(),
@@ -57,7 +89,8 @@ router.post("/",(req, res, next) => {
         password: req.body.password,
         køn: req.body.køn,
         email: req.body.email,
-        alder: req.body.alder
+        alder: req.body.alder,
+        userBillede: req.file.path
     });
     user
     .save()
@@ -154,7 +187,7 @@ router.delete("/:userId",(req, res, next) => {
 router.get("/:userId", (req, res, next) => {
     const id = req.params.userId;
   User.findById(id)
-  .select("username password _id køn email alder")
+  .select("username password _id køn email alder userBillede")
   .exec()
   .then(doc =>{
       console.log("Fra vores MongoDB database", doc);
