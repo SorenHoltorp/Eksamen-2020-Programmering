@@ -1,6 +1,7 @@
 {
 "env": {
-    "MONGO_ATLAS_PW":"soren"
+    "MONGO_ATLAS_PW":"soren",
+    "JWT_KEY": "hemmelig"
 }
 
 }

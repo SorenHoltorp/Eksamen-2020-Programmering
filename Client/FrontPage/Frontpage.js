@@ -20,6 +20,6 @@ document.getElementById("create").onclick = function(){
                 alert(xhttp.responseText);
             }
         };
-        xhttp.open("GET", "http://localhost:30000", true);
+        xhttp.open("GET", "http://localhost:3000/Client/FrontPage/frontpage.html", true);
         xhttp.send();
       });
