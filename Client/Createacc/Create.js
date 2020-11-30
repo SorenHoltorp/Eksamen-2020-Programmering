@@ -3,27 +3,26 @@ const mongoose = require("mongoose");
 
 
 
-
-function validateContactInformation() {
+/* function validateContactInformation() {
     
     
     // Punkt 1: Sæt JS variable, til de værdier der er indtastet i HTML formen
     
-    var name = document.getElementById('user_name').value;
-    var password = document.getElementById('password').value;
-    var phone = document.getElementById('phone').value;
-    var email = document.getElementById('email').value;
+    let name = document.getElementById('user_name').value;
+    let password = document.getElementById('password').value;
+    let phone = document.getElementById('phone').value;
+    let email = document.getElementById('email').value;
 
-    var comment = document.getElementById('additional_info').value;
-    var contactDay = document.getElementById('contact_day').value;
-    var contactMonth = document.getElementById('contact_month').value;
-    var contactYear = document.getElementById('contact_year').value;
+    let comment = document.getElementById('additional_info').value;
+    let contactDay = document.getElementById('contact_day').value;
+    let contactMonth = document.getElementById('contact_month').value;
+    let contactYear = document.getElementById('contact_year').value;
     
      
     // Date() klassen henter dags dato i centraleuropæisk tid GMT +0200
     // Når vi instantierer en variabel ligesom currentDate i den nedenstående med new Date(), så indeholder denne variabel altså dags dato og klokkeslæt
-    var currentDate = new Date();
-    var contactDate = new Date();
+    let currentDate = new Date();
+    let contactDate = new Date();
     
     
     // vi tilføjer brugerens valgte kontakt dato med setFullYear()-metoden
@@ -33,19 +32,19 @@ function validateContactInformation() {
     // Radio buttons er faktisk et array, hvor man kun kan vælge en mulighed, så vi skal loope igennem for at tjekke om en radio button er checked
 
     //Henter arrayet
-    var ratingButtons = document.getElementsByClassName('user_rating'); 
+    let ratingButtons = document.getElementsByClassName('user_rating'); 
 
     //Længden af arrayet ligges i en variable kaldt len
-    var len = ratingButtons.length;
+    let len = ratingButtons.length;
 
     //Placeholder ofr userRating, som pt. bare er en tom String
-    var userRating = "";
+    let userRating = "";
     
     /* vi laver et loop og ser efter om rating button er checked med ".checked" keywordet.
-     Hvis den er checked, så finder den valuen i den radio button */
-    var i = 0;
+     Hvis den er checked, så finder den valuen i den radio button 
+     let i = 0;
     
-    var validRadio = false;
+    let validRadio = false;
     for (i=0; i<len; i++) {
         if (ratingButtons[i].checked) {
             userRating = ratingButtons[i].value;
@@ -67,6 +66,8 @@ function validateContactInformation() {
        
 }
 
+*/
+
 //Code til at sende mig videre til main page    
 
  /*type="text/javascript">
@@ -77,3 +78,23 @@ document.getElementById("opret").onclick = function(){
 /* document.getElementById("main").onclick = function(){
       location.href = "../Mainpage/mainpage.html";
      } */
+
+let button = document.getElementById("main");
+button.addEventListener("click", ()=> opretKnap)
+
+
+     function opretKnap(){
+        let name = document.getElementById('user_name').value;
+        let password = document.getElementById('password').value;
+        let phone = document.getElementById('phone').value;
+        let email = document.getElementById('email').value;
+        let comment = document.getElementById('additional_info').value;
+        let contactDay = document.getElementById('contact_day').value;
+        let contactMonth = document.getElementById('contact_month').value;
+        let contactYear = document.getElementById('contact_year').value;
+        axios.post("http://localhost:3000/user/Client/Createacc/Createacc.html",)
+          .then(response=>{
+              console.log(response)
+              window.location.href = "..//Mainpage/mainpage.html"
+          })
+     }

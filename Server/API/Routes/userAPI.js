@@ -43,11 +43,11 @@ const upload = multer({storage: storage,
 
 
 // Login function
-router.post("/Client/FrontPage/frontpage.html", UserController.user_create, checkAuth)
+router.post("/Client/FrontPage/frontpage.html", UserController.user_login, checkAuth)
 
 
 // Oprettelse af bruger med crypto password - med POST request
-router.post("/Client/Createacc/Createacc.html", UserController.user_login, /*upload.single("userImage"),*/ );
+router.post("/Client/Createacc/Createacc.html", UserController.user_create, /*upload.single("userImage"),*/ );
             
     
 //GET Request for at finde alle profiler i databasen

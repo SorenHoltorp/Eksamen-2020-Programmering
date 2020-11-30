@@ -55,7 +55,7 @@ exports.user_get_id = (req, res, next) => {
       console.log("Fra vores MongoDB database", doc);
       if(doc){
         res.status(200).json({
-        product: doc,
+        user: doc,
         request: {
             type: "Get",
             description: "Listen over alle users",
@@ -127,8 +127,8 @@ exports.user_delete_id = (req, res, next) => {
     });
 }
 
-//Opret bruger
-exports.user_create = (req, res, next) => {
+//login
+exports.user_login = (req, res, next) => {
     User.find({ username: req.body.username})
     .exec()
     .then(user =>{
@@ -152,7 +152,7 @@ exports.user_create = (req, res, next) => {
             }
             );
             return res.status(200).json({
-                message: "Login succesful",
+                message: user,
                 token: token
             })
         }
@@ -170,11 +170,12 @@ exports.user_create = (req, res, next) => {
     
 }
 
-//Login
-exports.user_login = (req,res,next) => {
+//create
+exports.user_create = (req,res,next) => {
     User.find({username:req.body.username})
     .exec()
     .then(user =>{
+        console.log("178")
         if(user.length >= 1){
             return res.status(409).json({
                 message: "Username er allerede taget i brug"
@@ -185,6 +186,7 @@ exports.user_login = (req,res,next) => {
     })
     console.log(req.file);
     bcrypt.hash(req.body.password,10, (err,hash) => {
+        console.log(189)
         if (err) {
             return res.status(500).json({
                 error: err
@@ -197,6 +199,7 @@ exports.user_login = (req,res,next) => {
                      køn: req.body.køn,
                   email: req.body.email,
                   alder: req.body.alder,
+                  info: req.body.info
                  // userBillede: req.file.path
                   });
                   user.save()

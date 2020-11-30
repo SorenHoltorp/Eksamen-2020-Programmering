@@ -1,8 +1,7 @@
 document.getElementById("create").onclick = function(){
         location.href = "../Createacc/Createacc.html";
     }
-
-    // Ændre 0 til local storage username
+    /* Ændre 0 til local storage username
     document.getElementById("login").onclick = function(){
         if (username.value.length !== 0 && password.value.length !== 0 ){
             location.href = "../Mainpage/mainpage.html";
@@ -10,16 +9,21 @@ document.getElementById("create").onclick = function(){
                 alert ("fill out login");
             }
         }
-    
-        let apiButton = document.getElementById("apiButton");
-    apiButton.addEventListener("click", function(){
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                // Typical action to be performed when the document is ready:
-                alert(xhttp.responseText);
-            }
-        };
-        xhttp.open("GET", "http://localhost:3000/Client/FrontPage/frontpage.html", true);
-        xhttp.send();
-      });
+        */
+ let button = document.getElementById("login")
+ button.addEventListener("click", (event) => {
+    loginknap()
+    event.preventDefault()
+   } );
+ 
+
+      function loginknap(){
+          let username = document.getElementById("idUsername")
+          let psw = document.getElementById("idPsw")
+          axios.post("http://localhost:3000/user/Client/FrontPage/frontpage.html", {user:username.value, password: psw.value})
+          .then(response=>{
+              console.log(response)
+              window.location.href = "..//Mainpage/mainpage.html";
+            localStorage.setItem("activeUser",toString(response.data))
+          })
+      }
