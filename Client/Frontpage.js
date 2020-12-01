@@ -21,3 +21,6 @@
       document.getElementById("create").onclick = function(){
         location.href = "Createacc.html";
     }
+
+
+    //Kan logge ind med so - 1234

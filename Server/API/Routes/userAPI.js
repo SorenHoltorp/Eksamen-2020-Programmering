@@ -48,7 +48,7 @@ const upload = multer({storage: storage,
 // Login function
 router.post('/login', (req, res, next) => {
     console.log(req.body)
-    User.find({ username: req.body.username })
+    User.find({ userName: req.body.userName })
     .then(User => {
         if (User.length < 1) {
             return res.status(401).json({
@@ -63,8 +63,9 @@ router.post('/login', (req, res, next) => {
             });
         } if (result) {
             const token = jwt.sign({
-                username: User[0].username,
-                signUserId: User[0]._id
+                userName: User[0].userName,
+                User: User[0]._id,
+             //   password: password[0].password
             }, process.env.JWT_KEY, 
             {
                 expiresIn: "1h"
@@ -99,10 +100,10 @@ router.post('/login', (req, res, next) => {
 
 // Oprettelse af bruger med crypto password - med POST request
 router.post('/signup', (req, res, next) => {
-    User.find({username:req.body.username})
+    User.find({userName:req.body.userName})
     .exec()
     .then(signUser => {
-        console.log("178")
+        console.log("105")
         if(signUser.length >= 1) {
             return res.status(400).json({
                 message: "Username er allerede taget i brug"
@@ -117,12 +118,12 @@ router.post('/signup', (req, res, next) => {
                } else {
                    const signUser = new User ({
             //Her opretter vi et ID, igennem mongoose, som er unikt og som bruges som refference punkt igennem alle andre request.
-                      _id: new mongoose.Types.ObjectId(),
-                     username: req.body.username,
-                     password: hash,
-                     gender: req.body.gender,
-                  email: req.body.email,
-                  birthday: req.body.birthday,
+                    _id: new mongoose.Types.ObjectId(),
+                    userName: req.body.userName,
+                    password: hash,
+                    gender: req.body.gender,
+                    email: req.body.email,
+                    birthday: req.body.birthday,
                  // userBillede: req.file.path
                   });
                   signUser.save()
@@ -132,7 +133,7 @@ router.post('/signup', (req, res, next) => {
                       return res.status(201).json({
                           message:  "Oprettet en ny burger ved Søren TinderApp",
                         createdUser: {
-                          username: result.username,
+                          userName: result.userName,
                           _id: result._id,
                        } });
                     })
