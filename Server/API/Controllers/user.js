@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 // GET
 exports.user_get_all = (req, res, next) => {
     User.find()
-    .select("username password _id køn email alder userBillede")
+    .select("username password _id gender email birthday ")
     .exec()
     .then(docs =>{
         const svarpårequest = {
@@ -15,10 +15,9 @@ exports.user_get_all = (req, res, next) => {
                 return {
         username: doc.username,
         password: doc.password,
-        køn: doc.køn,
+        gender: doc.gender,
         email: doc.email,
-        alder: doc.alder,
-        userBillede: doc.userBillede,
+        birthday: doc.birthday,
         _id: doc._id,
         request:{
             type:"GET",
@@ -49,7 +48,7 @@ exports.user_get_all = (req, res, next) => {
 exports.user_get_id = (req, res, next) => {
     const id = req.params.userId;
   User.findById(id)
-  .select("username password _id køn email alder userBillede")
+  .select("username password _id gender email birthday ")
   .exec()
   .then(doc =>{
       console.log("Fra vores MongoDB database", doc);
@@ -87,7 +86,7 @@ exports.user_update_id = (req, res, next) => {
         /* Anden slags metode at fetche data på
         username: req.body.Newusername,
         password: req.body.Newpassword,
-        køn: req.body.Newkøn,
+        gender: req.body.Newgender,
         email: req.body.Newemail,
         */
         .exec()
@@ -128,108 +127,5 @@ exports.user_delete_id = (req, res, next) => {
 }
 
 //login
-exports.user_login = (req, res, next) => {
-    User.find({ username: req.body.username})
-    .exec()
-    .then(user =>{
-        if(user.length < 1){
-            return res.status(401).json({
-                message: "Kunne ikke logge ind"
-            });
-        }
-        bcrypt.compare(req.body.password, user[0].password, (err, result) =>{
-            if(err) {
-                return res.status(401).json({ 
-                    message: "Kunne ikke logge ind"
-            }); 
-        } if (result){
-            const token = jwt.sign({
-                username: user[0].username,
-                userId: user[0]._id
-            }, process.env.JWT_KEY, 
-            {
-                expiresIn: "1h"
-            }
-            );
-            return res.status(200).json({
-                message: user,
-                token: token
-            })
-        }
-        res.status(401).json({
-            message: "Kunne ikke logge ind"
-        })
-        }) 
-
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-    })
-    
-}
 
 //create
-exports.user_create = (req,res,next) => {
-    User.find({username:req.body.username})
-    .exec()
-    .then(user =>{
-        console.log("178")
-        if(user.length >= 1){
-            return res.status(409).json({
-                message: "Username er allerede taget i brug"
-            })
-        } else {
-
-        }
-    })
-    console.log(req.file);
-    bcrypt.hash(req.body.password,10, (err,hash) => {
-        console.log(189)
-        if (err) {
-            return res.status(500).json({
-                error: err
-            });
-        } else {const user = new User ({
-            //Her opretter vi et ID, igennem mongoose, som er unikt og som bruges som refference punkt igennem alle andre request.
-                      _id: new mongoose.Types.ObjectId(),
-                     username: req.body.username,
-                     password: hash,
-                     køn: req.body.køn,
-                  email: req.body.email,
-                  alder: req.body.alder,
-                  info: req.body.info
-                 // userBillede: req.file.path
-                  });
-                  user.save()
-                  .then(result => {
-                              // console logger det post request jeg sender
-                      console.log(result);
-                      res.status(201).json({
-                          message:  "Oprettet en ny burger ved Søren TinderApp",
-                          createdUser: {
-                          username: result.username,
-                          password: result.password,
-                          køn: result.køn,
-                          email: result.email,
-                          alder: result.alder,
-                          _id: result._id,
-                          request:{ 
-                              type:"GET",
-                              url: "http://localhost:3000/user/" + result._id
-                          }
-              }
-                      })
-                  })
-                  .catch( err =>{
-                      console.log(err);
-                      res.status(500).json({
-                          error: err
-                      })
-                  })
-              }
-          })
-                  
-              }
-

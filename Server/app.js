@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 // Kunne oversætte url data til javascript. boolean værdien siger noget om hvor kompleks værdierne skal være. False er simple værdier.
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan("dev"));
-app.use("/uploads",express.static("uploads"))
+// app.use("/uploads",express.static("uploads"))
 
 // Alt den her kode gør, at jeg kan sende req til single-view applikations igennem cors
 app.use((req, res,next) => {
