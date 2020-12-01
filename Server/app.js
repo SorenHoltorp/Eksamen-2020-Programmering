@@ -11,25 +11,28 @@ const app = express();
 const mongoose = require("mongoose");
 //nodejs måde at logge ting på - middleware
 const morgan = require("morgan");
-
+//require("dotenv/config")
 
 //Import route
 const userRoute = require("./API/Routes/userAPI")
-const matchRoute = require("./API/Routes/matchAPI")
+// const matchRoute = require("./API/Routes/matchAPI")
 
 // ved at tilføje process.env.MONGO_ATLAS_PW,
 // så behøver jeg ikke hardcore mit password ind i stien, istedet laver jeg et opbject inde i nodemon.json filen
 // ellers så er dette stien til min databse på mongoDB atlas
-mongoose.connect(
+ mongoose.connect(
  "mongodb+srv://soren:"
     + process.env.MONGO_ATLAS_PW + 
 "@tinderapp.f1lwk.mongodb.net/<dbname>?retryWrites=true&w=majority",
 { useNewUrlParser: true },
 { useUnifiedTopology: true }, // Virker ikke med vores server
 () => console.log("Serveren kører babe!"));
-
-mongoose.Promise = global.Promise;
-
+/*
+mongoose.connect(
+    process.env.MONGO_ATLAS_PW,
+    { useNewUrlParser: true },
+    () => console.log('Connected til serveren!'));
+*/
 
 // Så jeg kan snakke med Json filen ved alle request
 //app.use(cors())
@@ -43,9 +46,8 @@ app.use(morgan("dev"));
 // Alt den her kode gør, at jeg kan sende req til single-view applikations igennem cors
 app.use((req, res,next) => {
     res.header("Access-Control-Allow-Origin","*");
-    res.header(
-        "Access-Control-Allow-Headers","*");
-if (req.method === "OPTIONS"){
+    res.header("Access-Control-Allow-Headers","*");
+if (req.method === "OPTIONS") {
     res.header ("Access-Control-Allow-Methods","PUT, POST, PATCH, DELETE, GET");
     return res.status(200).json({});  
     }
@@ -54,7 +56,6 @@ if (req.method === "OPTIONS"){
 
 //Routes som skal håndtere requests
 app.use("/user", userRoute);
-app.use("/match", matchRoute);
 
 //Her laver jeg en error function som sender en error.message 
 // hvis man ikke har en sti på sin local host - gør at man ikke kan bruge api knappen

@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/SorenHoltorp/Eksamen-2020-Programmering#readme",
   "dependencies": {
-    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.16",

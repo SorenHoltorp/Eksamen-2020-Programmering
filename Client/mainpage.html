@@ -16,7 +16,7 @@ height: 200px;
     
     </head>
     <body>
-        <h1> Velkommen til din profil</h1>
+        <h1 id="velkomst"> Velkommen til din profil</h1>
 
 <img src="../img/profil.png" id="profilebillede" class="pb">  <br> <br>
 
@@ -40,8 +40,12 @@ height: 200px;
     <textarea type="text" rows="5" cols="40" id="additonal_info" value ="" placeholder="Jeg er supermand"></textarea>
     <br/>
 
+    <button id="sletbtn" type="button" class="deletebtn">Slet bruger</button>
+    <button id="editbtn" type="button" class="editbtn">Opdater bruger</button>
+
+
 </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script type="application/x-javascript" src="script.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>

@@ -3,6 +3,7 @@ const { match } = require("assert");
 //Router er noget som følger med express, vi enabler den som en function
 const router = express.Router();
 const mongoose = require("mongoose")
+const checkAuth = require('../middleware/check-auth');
 
 const Match = require("../Models/matchModel");
 
