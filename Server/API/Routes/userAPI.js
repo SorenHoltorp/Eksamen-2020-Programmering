@@ -80,7 +80,7 @@ router.post('/login', async (req, res, next) => {
         bcrypt.compare(req.body.password, newuser[0].password, (err, result) => {
             if (err) {
                 return res.status(401).json({
-                    message: 'Login failed'
+                    message: 'Login failed by password'
                 });
             }
             if (result) {

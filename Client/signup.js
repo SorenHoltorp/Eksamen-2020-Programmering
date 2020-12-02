@@ -9,9 +9,9 @@ button.addEventListener('click', () => opretKnap())
         let birthday = document.getElementById('user_birthday');
         let radio = document.querySelector('input[name="gender"]:checked').value
             //let bio = document.querySelector('input[id="bio"]');
-        console.log(radio)
+        console.log(opretKnap)
         axios.post("http://localhost:3000/user/signup/", {userName: userName.value, password: psw.value,
-    email: email.value, birthday: birthday.value, gender: radio.value})
+    email: email.value, birthday: birthday.value, /*gender: gender.value,*/ gender: radio, /*bio: bio.value*/})
           .then(response=>{
               console.log(response)
               window.location = 'mainpage.html';
