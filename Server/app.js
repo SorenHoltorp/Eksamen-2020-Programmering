@@ -11,11 +11,13 @@ const app = express();
 const mongoose = require("mongoose");
 //nodejs måde at logge ting på - middleware
 const morgan = require("morgan");
-//require("dotenv/config")
+require("dotenv/config")
 
 //Import route
 const userRoute = require("./API/Routes/userAPI")
 // const matchRoute = require("./API/Routes/matchAPI")
+
+
 
 // ved at tilføje process.env.MONGO_ATLAS_PW,
 // så behøver jeg ikke hardcore mit password ind i stien, istedet laver jeg et opbject inde i nodemon.json filen
@@ -23,7 +25,7 @@ const userRoute = require("./API/Routes/userAPI")
  mongoose.connect(
  "mongodb+srv://soren:"
     + process.env.MONGO_ATLAS_PW + 
-"@tinderapp.f1lwk.mongodb.net/<dbname>?retryWrites=true&w=majority",
+"@tinderapp.f1lwk.mongodb.net/soren?retryWrites=true&w=majority",
 { useNewUrlParser: true },
 { useUnifiedTopology: true }, // Virker ikke med vores server
 () => console.log("Serveren kører babe!"));

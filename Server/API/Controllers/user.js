@@ -4,7 +4,6 @@ const User = require("../Models/userModel");
 // const mongoose = require("mongoose");
 
 // GET
-exports.user_get_all = 
 
 //Speciel id
 exports.user_get_id = (req, res, next) => {
