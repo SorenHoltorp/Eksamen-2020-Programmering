@@ -6,7 +6,7 @@ function showUser() {
         let userName = document.getElementById("userName");
         let gender = document.getElementById('gender');
         let email = document.getElementById('email');
-        let birthday = document.getElementById('birthday');
+        let user_birthday = document.getElementById('user_birthday');
         // let bio = document.getElementById('bio');
 
 
@@ -14,7 +14,7 @@ function showUser() {
         userName.innerHTML=user.message[0].userName;
         gender.innerHTML=user.message[0].gender;
         email.innerHTML=user.message[0].email;
-        birthday.innerHTML=user.message[0].birthday;
+        user_birthday.innerHTML=user.message[0].birthday;
         // bio.innerHTML = user.message[0].bio;
 
         console.log(showUser)

@@ -2,6 +2,7 @@ let button = document.getElementById("submit");
 button.addEventListener('click', () => opretKnap())
 
 
+
      function opretKnap() {
         let userName = document.getElementById('userName');
         let psw = document.getElementById('password');

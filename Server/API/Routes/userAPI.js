@@ -152,22 +152,21 @@ router.get("/", (req, res, next) => {
 
 //Vi bruger nu router til håndtere PATCH request (url) - specifik USERID
 //Jeg kan opdater alle mine propData med en ny ops.value. Jeg kan ikke tilføje nye. 
-router.put("/:newuserId", async (req, res, next) => {
-    await User.findByIdAndUpdate(req.params.newuserId)
-     .exec()
-     .then(result =>{ 
-         return res.status(200).json({
-             message: "User blev opdateret"
-         });
-     })
-     .catch(err =>{
-         console.log(err);
-         return res.status(500).json({
-             error: err
-         })
-     });
- });
+router.put("/:update", async (req, res, next) => {
+    const id = req.params.newuserId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+   await User.update({_id: id}, {$set: updateOps})
+    .exec()
+    .then(function(){
+        res.send("User opdateret")
+    })
+});
+
  
+
 
 // https://www.geeksforgeeks.org/mongoose-findbyidandupdate-function/
 
