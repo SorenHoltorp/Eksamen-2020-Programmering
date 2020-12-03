@@ -19,8 +19,30 @@ function showUser() {
 
         console.log(showUser)
 }
+//Logout
+let logoutknap = document.getElementById('logout');
+logoutknap.addEventListener('click', (event) => {
+event.preventDefault()  
+        logout()
+    window.location = "frontpage.html"
+});
 
-/*
+function logout(){
+    localStorage.removeItem("activeUser")
+};
+
+
+
+//Update
+let updateknap = document.getElementById('editbtn');
+updateknap.addEventListener('click', (event) => {
+event.preventDefault()  
+});
+
+document.getElementById("editbtn").onclick = function(){
+    location.href = "update.html";}
+
+//Slet
 let button = document.getElementById('sletbtn');
 button.addEventListener('click', (event) => {
 event.preventDefault()  
@@ -28,16 +50,11 @@ event.preventDefault()
 });
 
 function sletKnap() {
-    let user = showUser;
-    axios.delete('http://localhost:3000/user/userId/', { user: user, id: _id })
+    let user = JSON.parse(localStorage.getItem("activeUser"));
+    axios.delete('http://localhost:3000/user/' + user.message[0]._id)
     .then(response => {
         console.log(response)
         window.location = 'frontpage.html';
     })
 }
-*/
 
-
-document.getElementById("tilbagetilforside").onclick = function(){
-    location.href = "frontpage.html";
-}

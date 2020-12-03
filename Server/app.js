@@ -57,13 +57,13 @@ if (req.method === "OPTIONS") {
 });
 
 //Routes som skal håndtere requests
-app.use("/user", userRoute);
+app.use("/User", userRoute);
 
 //Her laver jeg en error function som sender en error.message 
 // hvis man ikke har en sti på sin local host - gør at man ikke kan bruge api knappen
 
-app.use((req, res,next)=> {
-    const error = new Error("Ough forkert sti johnny bravo");
+app.use((req, res, next)=> {
+    const error = new Error("pis og lort");
         error.status = 404;
             next(error);
         })

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Opdater din tinder profil</title>
+    
+
+    <style>
+body {
+  background-color: pink;
+  align-content: center;  
+}
+
+.container {
+    background-color: white;
+border-radius: 5px;
+  box-shadow: 0 2px 15px rgba(0,0,0.8);
+  overflow: hidden;
+  width: 420px;
+  max-width: 100%;
+}
+
+
+.header {
+      background-color: #F8F8FF;
+  border-bottom: 1px solid #F8F8FF;
+padding: 20px 40px ;
+}
+
+.header h2 {
+  margin: 0px;
+
+}
+
+.form {
+    padding: 30px 50px;
+
+}
+
+.opret {
+    background-color: cornsilk;
+    align-content: center;
+    padding: 10px;
+    margin: 20px;
+}
+    </style>
+
+    </head>
+    <body>
+      <form> 
+      <div>
+    
+        <h1>Opret konto til Sørens Tinder</h1>
+  
+        
+            
+            <label for="gender"><b>Vælg dit køn</b><br></label>
+            <input type="radio" class="gender" name="gender" value="Mand" checked/>Mand
+            <input type="radio" class="gender" name="gender" value="Kvinde"/>Kvinde
+            <input type="radio" class="gender" name="gender" value="Ciskkønnet"/>Noget trejde
+
+            
+            <br/>
+            <br/>
+            
+            <br/>
+            <label for="name"><b>Dit navn</b><br></label>
+            <input type="text" id="userName" value="" placeholder="Supermand"/>
+            <br/>
+            <br/>
+            
+        
+            <br/>
+            <label for="email"><b>Email</b><br></label>
+            <input type="text" id="email" value="" placeholder="Email addresse" name="email"/>
+            <br/>
+            <br/>
+
+            <br/>
+
+            <label for="birthday"><b>Din alder</b><br></label>
+            <input type="number" id="user_birthday" name="birthday"/>
+            <br/>
+            <br/>
+            
+
+            <label for="name"><b>Beskrivelse</label><br>
+                <textarea id="bio" type="text" rows="5" cols="40" id="additonal_info" value ="" placeholder="Jeg er supermand"></textarea>
+                <br/>
+          </div>
+
+            
+           <!--  Lidt tekst om dig
+            <br/>
+           <textarea type="text" rows="5" cols="30" id="additional_info" value="" placeholder="Din beskrivelse"></textarea>
+          <br/> 
+                      -->
+
+        
+            
+            <!-- Submit button, den gider ikke umiddelbart sende videre til main -->
+
+            <div> 
+            <button id="submit" class="signup" type="button">Update konto</button>
+          </div>
+
+        </form>
+        <!-- Linking external Javascript file to our HTML page -->
+        
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script src="update.js"></script>
+
+    </body>
+
+</html>

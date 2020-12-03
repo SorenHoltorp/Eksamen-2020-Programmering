@@ -152,23 +152,37 @@ router.get("/", (req, res, next) => {
 
 //Vi bruger nu router til håndtere PATCH request (url) - specifik USERID
 //Jeg kan opdater alle mine propData med en ny ops.value. Jeg kan ikke tilføje nye. 
-router.patch("/:userId", UserController.user_update_id, );
+router.put("/:newuserId", async (req, res, next) => {
+    await User.findByIdAndUpdate(req.params.newuserId)
+     .exec()
+     .then(result =>{ 
+         return res.status(200).json({
+             message: "User blev opdateret"
+         });
+     })
+     .catch(err =>{
+         console.log(err);
+         return res.status(500).json({
+             error: err
+         })
+     });
+ });
+ 
 
 // https://www.geeksforgeeks.org/mongoose-findbyidandupdate-function/
 
 //Vi bruger nu router til håndtere DELETE request (url) - specifik USERID
-router.delete("/:userId",(req, res, next) => {
-    const id = req.params.signUserId
-    User.remove({ _id: id })
+router.delete("/:newuserId", async (req, res, next) => {
+   await User.findByIdAndDelete(req.params.newuserId)
     .exec()
     .then(result =>{ 
-        res.status(200).json({
+        return res.status(200).json({
             message: "User blev slettet"
         });
     })
     .catch(err =>{
         console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
             error: err
         })
     });
