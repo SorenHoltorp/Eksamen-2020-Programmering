@@ -152,17 +152,16 @@ router.get("/", (req, res, next) => {
 
 //Vi bruger nu router til håndtere PATCH request (url) - specifik USERID
 //Jeg kan opdater alle mine propData med en ny ops.value. Jeg kan ikke tilføje nye. 
-router.put("/:update", async (req, res, next) => {
-    const id = req.params.newuserId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
+router.patch("/:id", async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const updates = req.body
+        const options = {new: false}
+        const result = await User.findByIdAndUpdate (id,updates,options)
+        return res.send(result);
+    } catch (error) {
+        console.log(error.message)
     }
-   await User.update({_id: id}, {$set: updateOps})
-    .exec()
-    .then(function(){
-        res.send("User opdateret")
-    })
 });
 
  

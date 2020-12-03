@@ -15,24 +15,31 @@ updateKnap()
 
 } );
 
-let userName = document.getElementById("userName");
-    let email = document.getElementById("email");
    // let bio = document.getElementById("bio").value = user.message[0].bio;
 
-function updateKnap() {
-     
-   try {
-       axios.put("http://localhost:3000/user/" + user.message[0]._id, {
+function updateKnap()  {
+let userName = document.getElementById("userName");
+let email = document.getElementById("email");
+let user = JSON.parse(localStorage.getItem("activeUser"));
+
+
+       axios({
+       method: "patch",
+       url: "http://localhost:3000/user/"+ user.message[0]._id,
+        data: {
         userName: userName.value,
-        email: email.value 
-        })
+        email: email.value,
+        }
+    })
+    .then(response => {
+    console.log('34')
+    localStorage.setItem("activeUser"),JSON.stringify(response)
+        console.log(response)
+     window.location = 'mainpage.html';
 
-        console.log(res.data);
-    } catch (err) {
-        console.error(err)
-    }
-   };
-
+    })
+}
+    
 
 
     /*
