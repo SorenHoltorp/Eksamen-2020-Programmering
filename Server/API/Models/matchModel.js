@@ -5,7 +5,16 @@ const matchSchema = mongoose.Schema({
     matchName: {type: String},
     matchGender: {type: String},
     // billede: { type: mongoose.Schema.Types.ObjectId, ref:"User", required: true }
-    matchAlder: {type: Number}
-});
+    matchAlder: {type: Number},
+    /*likes: [{type: ObjectId,ref:"User"}],
+    comments:[{
+        text:String,
+        postedBy:{type:ObjectId,ref:"User"},
+    }],
+    postedby:{
+        type: ObjectId,
+        ref: "User"
+    }*/
+})
 
 module.exports = mongoose.model("Match", matchSchema);

@@ -58,10 +58,9 @@ function sletKnap() {
     })
 }
 
-let matctknap = document.getElementById('matchside');
-updateknap.addEventListener('click', (event) => {
-event.preventDefault()  
-});
 
 document.getElementById("matchside").onclick = function(){
     location.href = "match.html";}
+
+
+    

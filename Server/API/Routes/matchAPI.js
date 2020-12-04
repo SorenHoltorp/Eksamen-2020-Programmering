@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const checkAuth = require('../middleware/check-auth');
 
 const Match = require("../Models/matchModel");
+const User = require("../Models/userModel")
 
 router.post("/newmatch", (req, res, next)=>{
     const newmatch = new Match ({
@@ -13,10 +14,19 @@ router.post("/newmatch", (req, res, next)=>{
         matchGender: req.body.matchGender,
         matchAlder: req.body.matchAlder,
     }); 
-    newmatch.save()
+    newmatch
+    .save()
     .then(result => { 
         console.log(result);
-      res.status(201).json({result})  
+        //console.logger post
+      return res.status(201).json({
+        message:  "Oprettet et nyt MATCH ved Søren TinderApp",
+      createdMatch: { 
+        matchName: result.matchName,
+        matchGender: result.matchGender,
+        matchAlder: result.matchAlder,
+        _id: result._id,
+      } })  
     })
     .catch(err =>{
         console.log(err);
@@ -36,35 +46,52 @@ router.get("/", (req, res, next)=>{
 
 
 //Like function
-router.post("/like", (req,res,next)=>{
+router.put("/like", (req,res,next)=>{
+    Match.findByIdAndUpdate(req.body.matchId),{
+        $push:{likes:req.newuser._id}
+    },{
+        new: true
+    }.exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        } else{
+            res.json(result)
+        }
+    })
 
 })
 
 
 //Dislike function
-router.post("/dislike", (req,res,next)=>{
-    
+router.get("/dislike", (req,res,next)=>{
+    Match.findByIdAndUpdate(req.body.matchId),{
+        $pull:{likes:req.newuser._id}
+    },{
+        new: true
+    }.exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        } else{
+            res.json(result)
+        }
+    })
+
 })
 
 
 
-
 router.get("/", (req, res, next)=> {
-    Match.find()
+    User.find()
     .exec()
     .then(docs => { 
         const svarpåmatchrequest = {
             count: "Antal matches er " + docs.length,
             user: docs.map(doc =>{
                 return {
-                    matchName: doc.matchName,
-                    matchKøn: doc.matchKøn,
-                    matchAlder: doc.matchAlder,
-        _id: doc._id,
-        request:{
-            type:"GET",
-            url: "http://localhost:3000/match/" + doc._id 
-    }
+                    userName: doc.userName,
+                    gender: doc.gender,
+                    birthday: doc.birthday,
+                    _id: doc._id,
             }
         })
     }
