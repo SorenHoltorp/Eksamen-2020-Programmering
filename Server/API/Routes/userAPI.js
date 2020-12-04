@@ -3,12 +3,12 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 
 
 const UserController = require("../Controllers/user");
 const User = require("../Models/userModel");
 const checkAuth = require("../middleware/check-auth");
+const jwt = require ("jsonwebtoken")
 // const checkAuth = require("../middleware/check-auth");
 
 
@@ -41,7 +41,7 @@ router.post('/signup', async (req, res, next) => {
                     gender: req.body.gender,
                     email: req.body.email,
                     birthday: req.body.birthday,
-                 // userBillede: req.file.path
+                    //bio
                   });
                   newuser
                   .save()
@@ -67,7 +67,7 @@ router.post('/signup', async (req, res, next) => {
    });   });           
 
 // Login function
-router.post('/login', async (req, res, next) => {
+router.post('/login',/*checkAuth,*/ async (req, res, next) => {
     console.log(req.body)
     await User.find({ userName: req.body.userName })
     .exec()
@@ -152,19 +152,19 @@ router.get("/", (req, res, next) => {
 
 //Vi bruger nu router til håndtere PATCH request (url) - specifik USERID
 //Jeg kan opdater alle mine propData med en ny ops.value. Jeg kan ikke tilføje nye. 
-router.patch("/:id", async (req, res, next) => {
+router.patch("/:id",/*checkAuth,*/ async (req, res, next) => {
     try {
         const id = req.params.id
         const updates = req.body
-        const options = {new: false}
+        const options = {new: true}
         const result = await User.findByIdAndUpdate (id,updates,options)
-        return res.send(result);
+         res.send(result);
     } catch (error) {
         console.log(error.message)
     }
 });
 
- 
+  // Havde
 
 
 // https://www.geeksforgeeks.org/mongoose-findbyidandupdate-function/

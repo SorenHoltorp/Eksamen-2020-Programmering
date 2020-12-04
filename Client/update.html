@@ -46,17 +46,19 @@ padding: 20px 40px ;
 
     </head>
     <body>
-      <form action="http://localhost:3000/user/update/"> 
+      <form action="http://localhost:3000/user/" + user.message[0]._id> 
       <div>
     
-        <h1>Opret konto til Sørens Tinder</h1>
+        <h1>Opdater din konto til Sørens Tinder</h1>
   
         
             
             <label for="gender"><b>Vælg dit køn</b><br></label>
-            <input type="radio" class="gender" name="gender" value="Mand" checked/>Mand
+            <input type="radio" class="gender" name="gender" value="Mand"/>Mand
             <input type="radio" class="gender" name="gender" value="Kvinde"/>Kvinde
             <input type="radio" class="gender" name="gender" value="Ciskkønnet"/>Noget trejde
+            <input type="radio" class="gender" name="gender" value="undefined" checked/>Ikke valgt
+
 
             
             <br/>
@@ -82,26 +84,25 @@ padding: 20px 40px ;
             <br/>
             <br/>
             
-
-            <label for="name"><b>Beskrivelse</label><br>
-                <textarea id="bio" type="text" rows="5" cols="40" id="additonal_info" value ="" placeholder="Jeg er supermand"></textarea>
+<!-- 
+          <label for="name"><b>Beskrivelse</label><br>
+                <textarea id="bio" type="text" rows="5" cols="40" value ="" placeholder="Jeg er supermand"></textarea>
                 <br/>
+                -->
           </div>
 
-            
-           <!--  Lidt tekst om dig
-            <br/>
-           <textarea type="text" rows="5" cols="30" id="additional_info" value="" placeholder="Din beskrivelse"></textarea>
-          <br/> 
-                      -->
-
+        
         
             
             <!-- Submit button, den gider ikke umiddelbart sende videre til main -->
+            <p>Du vil blive bedt om at logge ind igen, med dine nye indstillinger, hvis du opdaterer.</p>
 
             <div> 
             <button id="submit" class="signup" type="button">Update konto</button>
-            <button id="tilbage" class="back" type="button">Tilbage til mainpage</button>
+            <br/>
+            <br/>
+            <button id="tilbage" class="back" type="button">Tilbage til login</button>
+            <br/>
 
           </div>
 

@@ -11,11 +11,8 @@ const userSchema = mongoose.Schema({
         sparse:true, 
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
-    birthday: {type: String}
-
-
-    
-   // userBillede: {type: String}
+    birthday: {type: String},
+   // bio: {type: String}
 });
 
 module.exports = mongoose.model("User", userSchema);

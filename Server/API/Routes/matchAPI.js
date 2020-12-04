@@ -1,5 +1,4 @@
 const express = require("express");
-const { match } = require("assert");
 //Router er noget som følger med express, vi enabler den som en function
 const router = express.Router();
 const mongoose = require("mongoose")
@@ -7,15 +6,14 @@ const checkAuth = require('../middleware/check-auth');
 
 const Match = require("../Models/matchModel");
 
-router.post("/", (req, res, next)=>{
-    const match = new Match ({
+router.post("/newmatch", (req, res, next)=>{
+    const newmatch = new Match ({
         _id: mongoose.Types.ObjectId(),
         matchName: req.body.matchName,
-        matchKøn: req.body.matchKøn,
-       // matchBillede: req.body.userId,
+        matchGender: req.body.matchGender,
         matchAlder: req.body.matchAlder,
     }); 
-    match.save()
+    newmatch.save()
     .then(result => { 
         console.log(result);
       res.status(201).json({result})  
@@ -35,6 +33,21 @@ router.get("/", (req, res, next)=>{
     })
 })
 */
+
+
+//Like function
+router.post("/like", (req,res,next)=>{
+
+})
+
+
+//Dislike function
+router.post("/dislike", (req,res,next)=>{
+    
+})
+
+
+
 
 router.get("/", (req, res, next)=> {
     Match.find()
@@ -74,8 +87,6 @@ router.get("/", (req, res, next)=> {
 });
 
 //Bruger metoden populate til at linke matches til en user?
-
-
 router.get("/:matchId", (req, res, next)=>{
     const id = req.params.matchId;
     Match.findById(id)
@@ -103,22 +114,22 @@ router.get("/:matchId", (req, res, next)=>{
   });
   })
 
-router.delete("/:matchId", (req, res, next)=>{
-    const id = req.params.matchId
-    Match.remove({ _id: id })
+router.delete("/:newmatchId", async (req, res, next)=>{
+    await Match.findByIdAndDelete(req.params.newmatchId)
     .exec()
     .then(result =>{ 
-        res.status(200).json({
-            message: "Match blev slettet,tudegrim var hun"
+        return res.status(200).json({
+            message: "Match blev slettet"
         });
     })
     .catch(err =>{
         console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
             error: err
         })
     });
 });
+
 
 
 

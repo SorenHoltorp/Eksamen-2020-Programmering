@@ -7,7 +7,7 @@ function showUser() {
         let gender = document.getElementById('gender');
         let email = document.getElementById('email');
         let user_birthday = document.getElementById('user_birthday');
-        // let bio = document.getElementById('bio');
+       // let bio = document.getElementById('bio');
 
 
         let user = JSON.parse(localStorage.getItem("activeUser"));
@@ -15,7 +15,7 @@ function showUser() {
         gender.innerHTML=user.message[0].gender;
         email.innerHTML=user.message[0].email;
         user_birthday.innerHTML=user.message[0].birthday;
-        // bio.innerHTML = user.message[0].bio;
+       // bio.innerHTML = user.message[0].bio;
 
         console.log(showUser)
 }
@@ -58,3 +58,10 @@ function sletKnap() {
     })
 }
 
+let matctknap = document.getElementById('matchside');
+updateknap.addEventListener('click', (event) => {
+event.preventDefault()  
+});
+
+document.getElementById("matchside").onclick = function(){
+    location.href = "match.html";}

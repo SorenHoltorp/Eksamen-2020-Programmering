@@ -15,7 +15,7 @@ require("dotenv/config")
 
 //Import route
 const userRoute = require("./API/Routes/userAPI")
-// const matchRoute = require("./API/Routes/matchAPI")
+const matchRoute = require("./API/Routes/matchAPI")
 
 
 
@@ -58,6 +58,7 @@ if (req.method === "OPTIONS") {
 
 //Routes som skal håndtere requests
 app.use("/User", userRoute);
+app.use("/Match", matchRoute);
 
 //Her laver jeg en error function som sender en error.message 
 // hvis man ikke har en sti på sin local host - gør at man ikke kan bruge api knappen
