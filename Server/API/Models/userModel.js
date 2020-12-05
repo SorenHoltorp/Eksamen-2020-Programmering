@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
     },
     birthday: {type: String},
    // bio: {type: String}
+   userlikeuser: [String]
 });
 
 module.exports = mongoose.model("User", userSchema);

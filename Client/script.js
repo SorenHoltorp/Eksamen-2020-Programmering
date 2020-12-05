@@ -1,3 +1,6 @@
+var loggedbruger=JSON.parse(localStorage.getItem("activeUser"));if(loggedbruger===null)
+{alert("Du er ikke logget korrekt ind");window.location.href="frontpage.html";}
+
 window.onload = function() {
     showUser();
 }
@@ -64,3 +67,4 @@ document.getElementById("matchside").onclick = function(){
 
 
     
+   

@@ -47,8 +47,9 @@ router.get("/", (req, res, next)=>{
 
 //Like function
 router.put("/like", (req,res,next)=>{
-    Match.findByIdAndUpdate(req.body.matchId),{
-        $push:{likes:req.newuser._id}
+    User.findByIdAndUpdate(req.body.newuserId),{
+        //$addToSet sikrer at det vi pusher ind i arrayet ikke allerede er der. Så vi ikke kan like en user to gange
+        $push:{userlikeuser:req.newuser._id}
     },{
         new: true
     }.exec((err,result)=>{
@@ -63,9 +64,9 @@ router.put("/like", (req,res,next)=>{
 
 
 //Dislike function
-router.get("/dislike", (req,res,next)=>{
+router.put("/dislike", (req,res,next)=>{
     Match.findByIdAndUpdate(req.body.matchId),{
-        $pull:{likes:req.newuser._id}
+        $pull:{userlikes:req.newuser._id}
     },{
         new: true
     }.exec((err,result)=>{

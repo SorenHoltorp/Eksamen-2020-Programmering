@@ -58,3 +58,13 @@ let gender = document.querySelector('input[name="gender"]:checked')
 
 //set item to 2
 
+let sutsko = document.getElementById('mainpage');
+sutsko.addEventListener('click', (event) => {
+event.preventDefault()  
+        mainpage()
+    window.location = "mainpage.html"
+});
+
+function mainpage(){
+    localStorage.getItem("activeUser")
+};
