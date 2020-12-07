@@ -1,6 +1,5 @@
 const http = require("http");
-const app = require("./app");
-
+const app = require("./app")
 //Sætter porten til et vilkårligt tal OR 3000
 const port = process.env.PORT || 3000;
 

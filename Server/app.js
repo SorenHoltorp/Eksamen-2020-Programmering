@@ -14,8 +14,8 @@ const morgan = require("morgan");
 require("dotenv/config")
 
 //Import route
-const userRoute = require("./API/Routes/userAPI")
-const matchRoute = require("./API/Routes/matchAPI")
+const userRoute = require("./API/Controller/userAPI")
+const matchRoute = require("./API/Controller/matchAPI")
 
 
 

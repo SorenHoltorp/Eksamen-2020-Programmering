@@ -1,17 +1,15 @@
 const express = require("express");
 //Router er noget som følger med express, vi enabler den som en function
 const router = express.Router();
+//Mongoose er en udbygning til MongoDB, gør at vi har en masse indbygget functioner til databasen.
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt")
 
 
-const UserController = require("../Controllers/user");
-const User = require("../Models/userModel");
+const User = require("../Models/userModel")
 const checkAuth = require("../middleware/check-auth");
 const jwt = require ("jsonwebtoken")
 // const checkAuth = require("../middleware/check-auth");
-
-
 
 // HTTP REQUEST NEDENFOR
 
@@ -164,11 +162,6 @@ router.patch("/:id",/*checkAuth,*/ async (req, res, next) => {
     }
 });
 
-  // Havde
-
-
-// https://www.geeksforgeeks.org/mongoose-findbyidandupdate-function/
-
 //Vi bruger nu router til håndtere DELETE request (url) - specifik USERID
 router.delete("/:newuserId", async (req, res, next) => {
    await User.findByIdAndDelete(req.params.newuserId)
@@ -188,7 +181,33 @@ router.delete("/:newuserId", async (req, res, next) => {
 
 
 //GET request for et speical id efter user ID
-router.get("/:userId", UserController.user_get_id,  )
+router.get("/:newuserId", (req, res, next) => {
+    const id = req.params.userId;
+  User.findById(id)
+  .select("username password _id gender email birthday ")
+  .exec()
+  .then(doc =>{
+      console.log("Fra vores MongoDB database", doc);
+      if(doc){
+        res.status(200).json({
+        user: doc,
+        request: {
+            type: "Get",
+            description: "Listen over alle users",
+            url: "http://localhost:3000/user"
+        }
+    });
+// HVIS ID ikke har en korrekt værdi, kaster vi denne error message
+      } else res.status(404).json({
+          message:"Dettte id har ikke en korrekt værdi"
+      });
+
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+});
+}  )
 
 
 module.exports = router;
