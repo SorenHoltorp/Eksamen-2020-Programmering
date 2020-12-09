@@ -43,12 +43,12 @@ router.get("/", (req, res, next)=>{
     })
 })
 */
+        //$addToSet sikrer at det vi pusher ind i arrayet ikke allerede er der. Så vi ikke kan like en user to gange
 
 
 //Like function
 router.put("/like", (req,res,next)=>{
     User.findByIdAndUpdate(req.body.newuserId),{
-        //$addToSet sikrer at det vi pusher ind i arrayet ikke allerede er der. Så vi ikke kan like en user to gange
         $push:{userlikeuser:req.newuser._id}
     },{
         new: true

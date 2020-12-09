@@ -1,4 +1,7 @@
 
+var loggedbruger=JSON.parse(localStorage.getItem("activeUser"));if(loggedbruger===null)
+{alert("Du er ikke logget korrekt ind");window.location.href="frontpage.html";}
+
 let user = JSON.parse(localStorage.getItem("activeUser"));
 
 document.getElementById("userName").value = user.message[0].userName
@@ -9,17 +12,6 @@ const gender = document.querySelector('input[name="gender"]:checked').value = us
 
 
 //Logout
-let logoutknap = document.getElementById('tilbage');
-logoutknap.addEventListener('click', (event) => {
-event.preventDefault()  
-        logout()
-    window.location = "frontpage.html"
-});
-
-function logout(){
-    localStorage.removeItem("activeUser")
-};
-
 
 let button = document.getElementById("submit")
 button.addEventListener("click", (event) => {
@@ -39,7 +31,6 @@ let gender = document.querySelector('input[name="gender"]:checked')
 // let bio = document.querySelector('input[id="bio"]');
 
 
-
        axios.patch("http://localhost:3000/user/" + user.message[0]._id, 
        { 
         userName: userName.value,
@@ -52,12 +43,14 @@ let gender = document.querySelector('input[name="gender"]:checked')
     console.log('34')
     localStorage.setItem("activeUser", JSON.stringify(response.data))
         console.log(response)
+        {alert("Din bruger er nu blevet opdateret. Derfor bliver nu ført tilbage tilbage til login")}
+        window.location = "frontpage.html"
+        
     })
 }
 
 
-//set item to 2
-
+//Tilbage til mainpage uden at have opdateret.
 let sutsko = document.getElementById('mainpage');
 sutsko.addEventListener('click', (event) => {
 event.preventDefault()  

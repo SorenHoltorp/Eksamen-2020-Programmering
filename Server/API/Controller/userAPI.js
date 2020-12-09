@@ -7,9 +7,8 @@ const bcrypt = require("bcrypt")
 
 
 const User = require("../Models/userModel")
-const checkAuth = require("../middleware/check-auth");
-const jwt = require ("jsonwebtoken")
 // const checkAuth = require("../middleware/check-auth");
+const jwt = require ("jsonwebtoken")
 
 // HTTP REQUEST NEDENFOR
 
@@ -18,20 +17,17 @@ router.post('/signup', async (req, res, next) => {
     await User.find({userName:req.body.userName})
     .exec()
     .then(signUser => {
-        console.log("105")
         if (signUser.length >= 1) {
             return res.status(400).json({
                 message: "Username er allerede taget i brug"
             });
         } else {
              bcrypt.hash(req.body.password,10, (err,hash) => {
-                console.log(189)
                  if (err) {
                      return res.status(500).json({
                          error: err
                     });
                } else {
-          //Her opretter vi et ID, igennem mongoose, som er unikt og som bruges som refference punkt igennem alle andre request.
                    const newuser = new User ({
                     _id: new mongoose.Types.ObjectId(),
                     userName: req.body.userName,
@@ -65,7 +61,7 @@ router.post('/signup', async (req, res, next) => {
    });   });           
 
 // Login function
-router.post('/login',/*checkAuth,*/ async (req, res, next) => {
+router.post('/login', /*checkAuth*/ async (req, res, next) => {
     console.log(req.body)
     await User.find({ userName: req.body.userName })
     .exec()
@@ -110,7 +106,7 @@ router.post('/login',/*checkAuth,*/ async (req, res, next) => {
 //GET Request for at finde alle profiler i databasen
 router.get("/", (req, res, next) => {
     User.find()
-    .select("userName password _id gender email birthday ")
+    .select("userName password _id gender email birthday userlikeuser ")
     .exec()
     .then(docs =>{
         const svarpårequest = {
@@ -122,6 +118,7 @@ router.get("/", (req, res, next) => {
         gender: doc.gender,
         email: doc.email,
         birthday: doc.birthday,
+        userlikeuser: doc.userlikeuser,
         _id: doc._id,
         request:{
             type:"GET",
@@ -130,14 +127,13 @@ router.get("/", (req, res, next) => {
                 }
             })
         }
-        //Man kan vælge at bruge det her eller ej, kommer an på om man vil kaste en fejl ved søgning efter en tom database, brug til reflektion
-     //   if (docs.length >=0){
+        if (docs.length >=0){
             res.status(200).json(svarpårequest);
-       // } else {
-       //     res.status(404).json({
-     //        message: "Intet data at vise, sorries"
-       //     });
-     //   }
+                } else {
+             res.status(404).json({
+                 message: "Intet data at vise, sorries"
+               });
+             }
         
     })
     .catch(err =>{
@@ -149,7 +145,6 @@ router.get("/", (req, res, next) => {
 } );
 
 //Vi bruger nu router til håndtere PATCH request (url) - specifik USERID
-//Jeg kan opdater alle mine propData med en ny ops.value. Jeg kan ikke tilføje nye. 
 router.patch("/:id",/*checkAuth,*/ async (req, res, next) => {
     try {
         const id = req.params.id

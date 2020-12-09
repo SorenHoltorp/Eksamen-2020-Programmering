@@ -27,6 +27,7 @@ let logoutknap = document.getElementById('logout');
 logoutknap.addEventListener('click', (event) => {
 event.preventDefault()  
         logout()
+        alert("Du vil nu blive logget ud, tak for nu!")
     window.location = "frontpage.html"
 });
 
@@ -45,11 +46,13 @@ event.preventDefault()
 document.getElementById("editbtn").onclick = function(){
     location.href = "update.html";}
 
+
 //Slet
 let button = document.getElementById('sletbtn');
 button.addEventListener('click', (event) => {
 event.preventDefault()  
-    sletKnap()  
+    sletKnap() 
+    logout() 
 });
 
 function sletKnap() {
@@ -57,9 +60,11 @@ function sletKnap() {
     axios.delete('http://localhost:3000/user/' + user.message[0]._id)
     .then(response => {
         console.log(response)
+        alert("Din bruger er nu slettet")
         window.location = 'frontpage.html';
     })
 }
+
 
 
 document.getElementById("matchside").onclick = function(){
