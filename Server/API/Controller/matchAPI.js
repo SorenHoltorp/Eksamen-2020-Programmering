@@ -4,6 +4,7 @@ const router = express.Router();
 const mongoose = require("mongoose")
 const checkAuth = require('../middleware/check-auth');
 
+//Henter mine schemaes
 const Match = require("../Models/matchModel");
 const User = require("../Models/userModel")
 
