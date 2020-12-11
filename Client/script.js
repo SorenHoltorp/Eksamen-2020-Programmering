@@ -1,6 +1,9 @@
+
+// kontrollerer om brugeren har en activeUser session med sig
 var loggedbruger=JSON.parse(localStorage.getItem("activeUser"));if(loggedbruger===null)
 {alert("Du er ikke logget korrekt ind");window.location.href="frontpage.html";}
 
+//Når vinduet bliver indlæst skal funktionen showUser kører
 window.onload = function() {
     showUser();
 }

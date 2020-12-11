@@ -1,4 +1,7 @@
 
+// Alt denne kode, er blot løbende forsøg på at udivikle en match-funktion. 
+// Selv det udkommenteret, ikke slettet, da det kan bruges til senere udvikling er jeg overbevist om
+
 function getnew()  {
     let userName = document.getElementById("userName");
     let birthday = document.getElementById("user_birthday");

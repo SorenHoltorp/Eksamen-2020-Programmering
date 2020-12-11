@@ -114,7 +114,7 @@ router.get("/", (req, res, next)=> {
 
 });
 
-//Bruger metoden populate til at linke matches til en user?
+//Id, i sidste ende - Bruge metoden populate til at linke matches til en user?
 router.get("/:matchId", (req, res, next)=>{
     const id = req.params.matchId;
     Match.findById(id)
